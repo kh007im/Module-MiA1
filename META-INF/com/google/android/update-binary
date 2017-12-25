@@ -4,7 +4,11 @@
 # Magisk Module Template Install Script
 # by topjohnwu
 <<<<<<< HEAD
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 827be27... Magisk Module Template 1500
 =======
 #
 >>>>>>> 827be27... Magisk Module Template 1500
@@ -14,6 +18,7 @@
 ps | grep zygote | grep -v grep >/dev/null && BOOTMODE=true || BOOTMODE=false
 $BOOTMODE || ps -A 2>/dev/null | grep zygote | grep -v grep >/dev/null && BOOTMODE=true
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 # This path should work in any cases
 TMPDIR=/dev/tmp
@@ -30,10 +35,16 @@ TMPDIR=/dev/tmp
 INSTALLER=$TMPDIR/install
 MAGISKBIN=/data/adb/magisk
 >>>>>>> 827be27... Magisk Module Template 1500
+=======
+TMPDIR=/dev/tmp
+INSTALLER=$TMPDIR/install
+MAGISKBIN=/data/adb/magisk
+>>>>>>> 827be27... Magisk Module Template 1500
 
 # Default permissions
 umask 022
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 ##########################################################################################
 # Flashable update-binary preparation
@@ -83,6 +94,8 @@ unzip -o "$ZIP" config.sh -d $INSTALLER 2>/dev/null
 . $INSTALLER/config.sh
 
 =======
+=======
+>>>>>>> 827be27... Magisk Module Template 1500
 # Initial cleanup
 rm -rf $TMPDIR 2>/dev/null
 mkdir -p $INSTALLER
@@ -146,6 +159,9 @@ unzip -o "$ZIP" module.prop config.sh 'common/*' -d $INSTALLER >&2
 MIN_VER=`grep_prop minMagisk $INSTALLER/module.prop`
 [ ! -z $MAGISK_VER_CODE -a $MAGISK_VER_CODE -ge $MIN_VER ] || require_new_magisk
 MODID=`grep_prop id $INSTALLER/module.prop`
+<<<<<<< HEAD
+>>>>>>> 827be27... Magisk Module Template 1500
+=======
 >>>>>>> 827be27... Magisk Module Template 1500
 MODPATH=$MOUNTPATH/$MODID
 
@@ -157,6 +173,7 @@ ui_print "******************************"
 ui_print "Powered by Magisk (@topjohnwu)"
 ui_print "******************************"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 ui_print "- Mounting /system, /vendor, /data, /cache"
 mount -o ro /system 2>/dev/null
@@ -176,10 +193,13 @@ api_level_arch_detect
 
 =======
 >>>>>>> 827be27... Magisk Module Template 1500
+=======
+>>>>>>> 827be27... Magisk Module Template 1500
 ##########################################################################################
 # Install
 ##########################################################################################
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 ui_print "- Extracting module files"
 unzip -o "$ZIP" -d $INSTALLER 2>/dev/null
@@ -206,11 +226,16 @@ ui_print "- Mounting $IMG to $MOUNTPATH"
 MAGISKLOOP=`$MAGISKBIN/magisk --mountimg $IMG $MOUNTPATH`
 is_mounted $MOUNTPATH || abort"! $IMG mount failed..."
 =======
+=======
+>>>>>>> 827be27... Magisk Module Template 1500
 # Get the variable reqSizeM. Use your own method to determine reqSizeM if needed
 request_zip_size_check "$ZIP"
 
 # This function will mount $IMG to $MOUNTPATH, and resize the image based on $reqSizeM
 mount_magisk_img
+<<<<<<< HEAD
+>>>>>>> 827be27... Magisk Module Template 1500
+=======
 >>>>>>> 827be27... Magisk Module Template 1500
 
 # Create mod paths
@@ -218,16 +243,22 @@ rm -rf $MODPATH 2>/dev/null
 mkdir -p $MODPATH
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Copy files
 ui_print "- Copying files"
 mv $INSTALLER/system $MODPATH/system
 =======
+=======
+>>>>>>> 827be27... Magisk Module Template 1500
 # Extract files to system. Use your own method if needed
 ui_print "- Extracting module files"
 unzip -o "$ZIP" 'system/*' -d $MODPATH >&2
 
 # Remove placeholder
 rm -f $MODPATH/system/placeholder 2>/dev/null
+<<<<<<< HEAD
+>>>>>>> 827be27... Magisk Module Template 1500
+=======
 >>>>>>> 827be27... Magisk Module Template 1500
 
 # Handle replace folders
@@ -246,8 +277,13 @@ cp -af $INSTALLER/module.prop $MODPATH/module.prop
 if $BOOTMODE; then
   # Update info for Magisk Manager
 <<<<<<< HEAD
+<<<<<<< HEAD
   mktouch /magisk/$MODID/update
   cp -af $INSTALLER/module.prop /magisk/$MODID/module.prop
+=======
+  mktouch /sbin/.core/img/$MODID/update
+  cp -af $INSTALLER/module.prop /sbin/.core/img/$MODID/module.prop
+>>>>>>> 827be27... Magisk Module Template 1500
 =======
   mktouch /sbin/.core/img/$MODID/update
   cp -af $INSTALLER/module.prop /sbin/.core/img/$MODID/module.prop
@@ -268,6 +304,7 @@ set_permissions
 ##########################################################################################
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 $MAGISKBIN/magisk --umountimg $MOUNTPATH $MAGISKLOOP
 rmdir $MOUNTPATH
 
@@ -281,11 +318,16 @@ fi
 
 $BOOTMODE || recovery_cleanup
 =======
+=======
+>>>>>>> 827be27... Magisk Module Template 1500
 # Unmount magisk image and shrink if possible
 unmount_magisk_img
 
 $BOOTMODE || recovery_cleanup
 rm -rf $TMPDIR
+<<<<<<< HEAD
+>>>>>>> 827be27... Magisk Module Template 1500
+=======
 >>>>>>> 827be27... Magisk Module Template 1500
 
 ui_print "- Done"

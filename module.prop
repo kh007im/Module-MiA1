@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 id=Nachttier_MiA1Plus
 name=MiA1Plus
 version=v1.02
@@ -9,6 +10,8 @@ support=
 donate=
 template=4
 =======
+=======
+>>>>>>> 827be27... Magisk Module Template 1500
 id=template
 name=Template Module
 version=v1
@@ -16,4 +19,7 @@ versionCode=1
 author=topjohnwu
 description=A short description
 minMagisk=1500
+<<<<<<< HEAD
+>>>>>>> 827be27... Magisk Module Template 1500
+=======
 >>>>>>> 827be27... Magisk Module Template 1500

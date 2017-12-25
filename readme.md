@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# Module-MiA1
-=======
 # Magisk Module Template
 
 This `README.md` will be shown in Magisk Manager. Place any information / changelog / notes you like.
@@ -10,4 +7,3 @@ This `README.md` will be shown in Magisk Manager. Place any information / change
 Github has its own online markdown editor with a preview feature, you can use it to update your `README.md`! If you need more advanced syntax, check the [Markdown Cheat Sheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
 
 For more information about modules and repos, please check the [official documentations](https://github.com/topjohnwu/Magisk/blob/master/docs/module_repo.md)
->>>>>>> 827be27... Magisk Module Template 1500

@@ -2,6 +2,7 @@
 # Example: Change dpi
 # ro.sf.lcd_density=320
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 # CHANGE
 
@@ -22,5 +23,7 @@ persist.camera.is_type=4
 # Audio recording
 ro.qc.sdk.audio.fluencetype=fluencepro
 
+=======
+>>>>>>> 827be27... Magisk Module Template 1500
 =======
 >>>>>>> 827be27... Magisk Module Template 1500
