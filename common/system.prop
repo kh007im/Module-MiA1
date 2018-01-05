@@ -1,0 +1,23 @@
+# This file will be read by resetprop
+# Example: Change dpi
+# ro.sf.lcd_density=320
+
+# CHANGE
+
+# Codec Assistant
+mm.enable.qcom_parser=3183219
+
+# Multi Users
+fw.max_users=30
+fw.show_multiuserui=1
+
+# NEW
+
+# Camera
+persist.camera.HAL3.enabled=1
+persist.camera.eis.enable=1
+persist.camera.is_type=4
+
+# Audio recording
+ro.qc.sdk.audio.fluencetype=fluencepro
+

@@ -1,0 +1,6 @@
+V1.02 - Behebung eines Fehlers im Stock-ROM (Assistant antwortet nicht mit Sprachausgabe; Wechsel Codec)
+- Verbesserung Audio Aufnahme
+- Aktivierung Unterstützung Benutzerprofile
+- sRGB entfernt (nicht wirksam)
+V1.01 - Fehlerbehebung
+V1.00 - Initial
