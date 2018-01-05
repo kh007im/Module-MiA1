@@ -1,6 +1,10 @@
-V1.02 - Behebung eines Fehlers im Stock-ROM (Assistant antwortet nicht mit Sprachausgabe; Wechsel Codec)
-- Verbesserung Audio Aufnahme
-- Aktivierung Unterstützung Benutzerprofile
-- sRGB entfernt (nicht wirksam)
-V1.01 - Fehlerbehebung
-V1.00 - Initial
+# MiA1
+
+Various Setting for MiA1 (template 1500)
+
+:: Enable Camera API 2
+:: Enable camera eis
+:: Set Selinux mode to permissive
+:: Improve audio recording
+:: Support user profiles
+:: Fixed bug in the stock ROM (Assistant does not answer with voice output)
