@@ -3,13 +3,18 @@
 #
 # Magisk Module Template Install Script
 # by topjohnwu
+<<<<<<< HEAD
 # 
+=======
+#
+>>>>>>> 827be27... Magisk Module Template 1500
 ##########################################################################################
 
 # Detect whether in boot mode
 ps | grep zygote | grep -v grep >/dev/null && BOOTMODE=true || BOOTMODE=false
 $BOOTMODE || ps -A 2>/dev/null | grep zygote | grep -v grep >/dev/null && BOOTMODE=true
 
+<<<<<<< HEAD
 # This path should work in any cases
 TMPDIR=/dev/tmp
 MOUNTPATH=/magisk
@@ -20,10 +25,16 @@ if $BOOTMODE; then
 fi
 INSTALLER=$TMPDIR/install
 MAGISKBIN=/data/magisk
+=======
+TMPDIR=/dev/tmp
+INSTALLER=$TMPDIR/install
+MAGISKBIN=/data/adb/magisk
+>>>>>>> 827be27... Magisk Module Template 1500
 
 # Default permissions
 umask 022
 
+<<<<<<< HEAD
 ##########################################################################################
 # Flashable update-binary preparation
 ##########################################################################################
@@ -71,6 +82,71 @@ unzip -o "$ZIP" config.sh -d $INSTALLER 2>/dev/null
 
 . $INSTALLER/config.sh
 
+=======
+# Initial cleanup
+rm -rf $TMPDIR 2>/dev/null
+mkdir -p $INSTALLER
+
+# echo before loading util_functions
+ui_print() { echo "$1"; }
+
+require_new_magisk() {
+  ui_print "*******************************"
+  ui_print " Please install Magisk v15.0+! "
+  ui_print "*******************************"
+  exit 1
+}
+
+##########################################################################################
+# Environment
+##########################################################################################
+
+OUTFD=$2
+ZIP=$3
+
+mount /data 2>/dev/null
+
+# Utility functions must exist
+[ -f $MAGISKBIN/util_functions.sh ] || require_new_magisk
+# Load utility fuctions
+. $MAGISKBIN/util_functions.sh
+
+# We can't alter magisk image live, use alternative image if required
+$BOOTMODE && IMG=/data/adb/magisk_merge.img
+# Always mount under tmp
+MOUNTPATH=$TMPDIR/magisk_img
+
+# Preperation for flashable zips
+get_outfd
+
+# Mount partitions
+mount_partitions
+
+# Detect version and architecture
+api_level_arch_detect
+
+# You can get the Android API version from $API, the CPU architecture from $ARCH
+# Useful if you are creating Android version / platform dependent mods
+
+# Setup busybox and binaries
+$BOOTMODE && boot_actions || recovery_actions
+
+##########################################################################################
+# Preparation
+##########################################################################################
+
+# Extract common files
+unzip -o "$ZIP" module.prop config.sh 'common/*' -d $INSTALLER >&2
+
+[ ! -f $INSTALLER/config.sh ] && abort "! Unable to extract zip file!"
+# Load configurations
+. $INSTALLER/config.sh
+
+# Check the installed magisk version
+MIN_VER=`grep_prop minMagisk $INSTALLER/module.prop`
+[ ! -z $MAGISK_VER_CODE -a $MAGISK_VER_CODE -ge $MIN_VER ] || require_new_magisk
+MODID=`grep_prop id $INSTALLER/module.prop`
+>>>>>>> 827be27... Magisk Module Template 1500
 MODPATH=$MOUNTPATH/$MODID
 
 # Print mod name
@@ -81,6 +157,7 @@ ui_print "******************************"
 ui_print "Powered by Magisk (@topjohnwu)"
 ui_print "******************************"
 
+<<<<<<< HEAD
 ui_print "- Mounting /system, /vendor, /data, /cache"
 mount -o ro /system 2>/dev/null
 mount -o ro /vendor 2>/dev/null
@@ -97,10 +174,13 @@ api_level_arch_detect
 # You can get the Android API version from $API, the CPU architecture from $ARCH
 # Useful if you are creating Android version / platform dependent mods
 
+=======
+>>>>>>> 827be27... Magisk Module Template 1500
 ##########################################################################################
 # Install
 ##########################################################################################
 
+<<<<<<< HEAD
 ui_print "- Extracting module files"
 unzip -o "$ZIP" -d $INSTALLER 2>/dev/null
 request_size_check $INSTALLER
@@ -125,14 +205,30 @@ fi
 ui_print "- Mounting $IMG to $MOUNTPATH"
 MAGISKLOOP=`$MAGISKBIN/magisk --mountimg $IMG $MOUNTPATH`
 is_mounted $MOUNTPATH || abort"! $IMG mount failed..."
+=======
+# Get the variable reqSizeM. Use your own method to determine reqSizeM if needed
+request_zip_size_check "$ZIP"
+
+# This function will mount $IMG to $MOUNTPATH, and resize the image based on $reqSizeM
+mount_magisk_img
+>>>>>>> 827be27... Magisk Module Template 1500
 
 # Create mod paths
 rm -rf $MODPATH 2>/dev/null
 mkdir -p $MODPATH
 
+<<<<<<< HEAD
 # Copy files
 ui_print "- Copying files"
 mv $INSTALLER/system $MODPATH/system
+=======
+# Extract files to system. Use your own method if needed
+ui_print "- Extracting module files"
+unzip -o "$ZIP" 'system/*' -d $MODPATH >&2
+
+# Remove placeholder
+rm -f $MODPATH/system/placeholder 2>/dev/null
+>>>>>>> 827be27... Magisk Module Template 1500
 
 # Handle replace folders
 for TARGET in $REPLACE; do
@@ -149,8 +245,13 @@ $PROPFILE && cp -af $INSTALLER/common/system.prop $MODPATH/system.prop
 cp -af $INSTALLER/module.prop $MODPATH/module.prop
 if $BOOTMODE; then
   # Update info for Magisk Manager
+<<<<<<< HEAD
   mktouch /magisk/$MODID/update
   cp -af $INSTALLER/module.prop /magisk/$MODID/module.prop
+=======
+  mktouch /sbin/.core/img/$MODID/update
+  cp -af $INSTALLER/module.prop /sbin/.core/img/$MODID/module.prop
+>>>>>>> 827be27... Magisk Module Template 1500
 fi
 
 # post-fs-data mode scripts
@@ -166,6 +267,7 @@ set_permissions
 # Finalizing
 ##########################################################################################
 
+<<<<<<< HEAD
 $MAGISKBIN/magisk --umountimg $MOUNTPATH $MAGISKLOOP
 rmdir $MOUNTPATH
 
@@ -178,6 +280,13 @@ if [ $curSizeM -gt $newSizeM ]; then
 fi
 
 $BOOTMODE || recovery_cleanup
+=======
+# Unmount magisk image and shrink if possible
+unmount_magisk_img
+
+$BOOTMODE || recovery_cleanup
+rm -rf $TMPDIR
+>>>>>>> 827be27... Magisk Module Template 1500
 
 ui_print "- Done"
 exit 0
